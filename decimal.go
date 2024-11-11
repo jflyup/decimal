@@ -1114,7 +1114,7 @@ func parseFixed[T string | []byte](v T) (int64, bool) {
 		v = v[1 : len(v)-1]
 	}
 
-	if len(v) == 0 {
+	if len(v) == 2 && v[0] == '"' && v[1] == '"' {
 		return 0, true
 	}
 
