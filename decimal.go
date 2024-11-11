@@ -1114,6 +1114,10 @@ func parseFixed[T string | []byte](v T) (int64, bool) {
 		v = v[1 : len(v)-1]
 	}
 
+	if len(v) == 0 {
+		return 0, true
+	}
+
 	// max len of fixed is 21, e.g. -9_223_372.000_000_000_000
 	if len(v) > 21 {
 		return 0, false

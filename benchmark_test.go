@@ -4,9 +4,9 @@ import (
 	"database/sql/driver"
 	"testing"
 
-	"github.com/alpacahq/alpacadecimal"
 	ericdecimal "github.com/ericlagergren/decimal"
 	ericpostgres "github.com/ericlagergren/decimal/sql/postgres"
+	alpacadecimal "github.com/jflyup/decimal"
 
 	"github.com/shopspring/decimal"
 )

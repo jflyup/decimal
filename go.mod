@@ -1,4 +1,4 @@
-module github.com/alpacahq/alpacadecimal
+module github.com/jflyup/decimal
 
 go 1.18
 

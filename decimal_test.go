@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/alpacahq/alpacadecimal"
+	alpacadecimal "github.com/jflyup/decimal"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/require"
 )
@@ -658,7 +658,12 @@ func TestDecimal(t *testing.T) {
 			require.NoError(t, err)
 			shouldEqual(t, x, alpacadecimal.New(123456, -3))
 		}
-
+		{
+			var x alpacadecimal.Decimal
+			err := x.UnmarshalJSON([]byte(""))
+			require.NoError(t, err)
+			shouldEqual(t, x, alpacadecimal.Zero)
+		}
 		{
 			var x alpacadecimal.Decimal
 			err := x.UnmarshalJSON([]byte("error"))
