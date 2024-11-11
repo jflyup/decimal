@@ -998,12 +998,12 @@ func TestDecimal(t *testing.T) {
 	})
 
 	t.Run("Decimal.Truncate", func(t *testing.T) {
-		x := alpacadecimal.NewFromFloat(1.234)
+		x := alpacadecimal.NewFromFloat(1.2344567865)
 		require.Equal(t, "1", x.Truncate(0).String())
 		require.Equal(t, "1.2", x.Truncate(1).String())
 		require.Equal(t, "1.23", x.Truncate(2).String())
 		require.Equal(t, "1.234", x.Truncate(3).String())
-		require.Equal(t, "1.234", x.Truncate(4).String())
+		require.Equal(t, "1.2344567865", x.Truncate(14).String())
 
 		y := alpacadecimal.NewFromFloat(-1.234)
 		require.Equal(t, "-1", y.Truncate(0).String())

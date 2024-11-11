@@ -944,6 +944,9 @@ func (d Decimal) Tan() Decimal {
 // Truncate truncates off digits from the number, without rounding.
 func (d Decimal) Truncate(precision int32) Decimal {
 	if d.fallback == nil {
+		if 12-precision < 0 {
+			precision = 12
+		}
 		s := pow10Table[12-precision]
 		return Decimal{fixed: d.fixed / s * s}
 	}
