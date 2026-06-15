@@ -501,6 +501,16 @@ func (d Decimal) InexactFloat64() float64 {
 	return d.asFallback().InexactFloat64()
 }
 
+// ApproxFloat64 returns a fast float64 approximation.
+// Fixed-point values use an allocation-free conversion that may differ from
+// the correctly rounded result by one ULP.
+func (d Decimal) ApproxFloat64() float64 {
+	if d.fallback == nil {
+		return float64(d.fixed) / float64(scale)
+	}
+	return d.fallback.InexactFloat64()
+}
+
 // optimized:
 // IntPart returns the integer component of the decimal.
 func (d Decimal) IntPart() int64 {
