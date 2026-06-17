@@ -508,6 +508,18 @@ func (d Decimal) ApproxFloat64() float64 {
 	if d.fallback == nil {
 		return float64(d.fixed) / float64(scale)
 	}
+
+	// fallback fast path: skip big.Rat when the coefficient fits int64 and the
+	// exponent is in range — correctly rounded via an exact power of ten.
+	if exp := d.fallback.Exponent(); exp >= -18 && exp <= 18 {
+		if c := d.fallback.Coefficient(); c.IsInt64() {
+			ci := float64(c.Int64())
+			if exp <= 0 {
+				return ci / math.Pow10(int(-exp))
+			}
+			return ci * math.Pow10(int(exp))
+		}
+	}
 	return d.fallback.InexactFloat64()
 }
 
